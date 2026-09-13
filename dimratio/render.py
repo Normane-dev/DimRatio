@@ -20,9 +20,8 @@ def _face_colors(mesh: trimesh.Trimesh, kind: str, view: str) -> np.ndarray:
         return np.clip((normals + 1.0) * 127.5, 0, 255).astype(np.uint8)
     if kind == "position_rgb":
         centers = np.asarray(mesh.triangles_center, dtype=np.float64)
-        lo, hi = mesh.bounds
-        normalized = (centers - lo) / np.maximum(hi - lo, 1e-12)
-        return np.clip(normalized * 255.0, 0, 255).astype(np.uint8)
+        encoded = np.clip(centers + 0.5, 0.0, 1.0)
+        return np.round(encoded * 255.0).astype(np.uint8)
     if kind != "shaded":
         raise ValueError(f"Unknown render kind: {kind}")
     forward = np.asarray(VIEW_BASES[view][2], dtype=np.float64)
@@ -119,4 +118,3 @@ def make_comparison(rows: list[tuple[str, list[Path]]], target: Path) -> None:
             image.close()
     target.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(target)
-

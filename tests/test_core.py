@@ -1,8 +1,9 @@
 import numpy as np
 
-from dimratio.camera import VIEW_ORDER, fixed_projection_scales
+from dimratio.camera import VIEW_BASES, VIEW_ORDER, fixed_projection_scales
 from dimratio.daaw import transform_by_axis_scales
 from dimratio.demo_mesh import make_demo_chair, normalize_longest_extent
+from dimratio.render import _face_colors
 
 
 def test_daaw_is_extent_exact_and_preserves_other_axes():
@@ -37,3 +38,18 @@ def test_global_camera_is_shared_and_covers_twenty_percent_variants():
     assert len(set(scales.values())) == 1
     assert np.isclose(next(iter(scales.values())), 1.392)
 
+
+def test_bottom_view_matches_frozen_coordinate_convention():
+    right, up, forward = VIEW_BASES["bottom"]
+    assert right == (-1, 0, 0)
+    assert up == (0, 1, 0)
+    assert forward == (0, 0, 1)
+
+
+def test_position_rgb_uses_shared_canonical_coordinates():
+    mesh = normalize_longest_extent(make_demo_chair())
+    colors = _face_colors(mesh, "position_rgb", "front")
+    expected = np.round(
+        np.clip(np.asarray(mesh.triangles_center) + 0.5, 0.0, 1.0) * 255.0
+    ).astype(np.uint8)
+    assert np.array_equal(colors, expected)

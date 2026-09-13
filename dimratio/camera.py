@@ -17,7 +17,7 @@ VIEW_BASES = {
     "back": ((-1, 0, 0), (0, 0, 1), (0, -1, 0)),
     "left": ((0, -1, 0), (0, 0, 1), (1, 0, 0)),
     "top": ((1, 0, 0), (0, 1, 0), (0, 0, -1)),
-    "bottom": ((1, 0, 0), (0, -1, 0), (0, 0, 1)),
+    "bottom": ((-1, 0, 0), (0, 1, 0), (0, 0, 1)),
 }
 
 
@@ -78,4 +78,3 @@ def project_vertices(vertices: np.ndarray, view: str) -> tuple[np.ndarray, np.nd
     image_xy = np.column_stack((vertices @ right, vertices @ up))
     depth = vertices @ forward
     return image_xy, depth
-
