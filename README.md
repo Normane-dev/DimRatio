@@ -13,7 +13,7 @@ Existing multi-view generation methods often provide limited viewpoint coverage,
 
 During input preparation, the reference image is expanded into horizontal views and reconstructed as a 3D proxy. The ViewForge Block centers and normalizes this proxy, locks a shared six-view camera setup, and renders geometric conditions for completing the basic six views. Given a target proportion, the ShapeSync Block converts the source and target dimensions into axis-wise scale ratios, applies DAAW to the shared proxy, and renders transformed normal and position conditions with the same cameras. These conditions guide the same geometry-conditioned multi-view generation model to produce the dimension-controlled views.
 
-![Qualitative dimension-control results](assets/showcase.png)
+![Qualitative dimension-control results](assets/complete_function.png)
 
 The figure shows the basic six-view completion and independent `+20%` changes in depth, height, and width. Dashed boxes indicate the views affected by each dimension change.
 
