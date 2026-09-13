@@ -5,15 +5,15 @@ This repository is a compact review-time artifact for **DimRatio**, a framework 
 1. **Detail-Aware Axis Warp (DAAW)** for extent-exact, monotone, detail-preserving mesh deformation.
 2. **Fixed shared-camera framing** for rendering the source object and every allowed dimensional variant with the same orthographic projection range.
 
-![DimRatio pipeline](assets/pipeline.svg)
+![DimRatio pipeline](assets/pipeline.png)
 
 ## Scope of this artifact
 
 The demo starts from a procedurally generated proxy mesh, applies a requested width/depth/height ratio, fixes the cameras using the complete allowed condition set, and exports shaded, normal-RGB, and position-RGB six-view renderings.
 
-![Runnable width-control example](assets/demo_width_p20.png)
+![Qualitative dimension-control results](assets/showcase.png)
 
-The upper row is the normalized source mesh and the lower row is the `width × 1.2` DAAW result. Both rows use the same six cameras and the same projection range.
+The figure shows the generated basic six views and independent `+20%` changes in depth, height, and width. All source and target conditions use the same six cameras and a shared projection range.
 
 This anonymous artifact intentionally does **not** distribute the paper benchmark, commercial product imagery, complete experiment repository, model checkpoints, or large-scale inference/evaluation pipeline. The full implementation, benchmark construction tools, trained artifacts where redistribution is permitted, and complete qualitative results will be released after publication.
 

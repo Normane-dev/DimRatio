@@ -24,7 +24,7 @@
     <p class="lead">Dimension-conditioned industrial multi-view generation through shared 3D geometry, detail-aware axis deformation, and fixed-camera geometric guidance.</p>
   </section>
   <h2>Pipeline</h2>
-  <img src="assets/pipeline.svg" alt="DimRatio pipeline">
+  <img src="assets/pipeline.png" alt="DimRatio pipeline">
   <div class="grid">
     <div class="card"><strong>Standard View Completion</strong><br>Constructs a shared proxy representation and completes missing canonical views.</div>
     <div class="card"><strong>Detail-Aware Axis Warp</strong><br>Meets the requested extent while allocating deformation away from salient geometric details.</div>
@@ -35,8 +35,8 @@
   <pre>pip install -r requirements.txt
 python run_demo.py --axis width --scale 1.2 --output outputs/width_p20
 pytest -q</pre>
-  <img src="assets/demo_width_p20.png" alt="Runnable width-control example">
-  <p>The source and width-controlled rows use identical standard-view cameras and a shared projection range.</p>
+  <img src="assets/showcase.png" alt="Qualitative dimension-control results">
+  <p>The basic and dimension-controlled views use identical standard-view cameras and a shared projection range.</p>
   <h2>Review-time release scope</h2>
   <p>This artifact contains the editable pipeline figure and minimal executable geometry/camera implementation. The paper benchmark, complete model integration, large-scale experiment code, and full qualitative results will be released after publication.</p>
   <footer>No author names, affiliations, private infrastructure paths, or credentials are included in this review artifact.</footer>
