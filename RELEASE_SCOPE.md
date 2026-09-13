@@ -2,9 +2,9 @@
 
 ## Included during anonymous review
 
-- Editable SVG pipeline diagram.
+- DimRatio pipeline figure.
 - Procedural demonstration mesh generator.
-- Detail-Aware Axis Warp implementation.
+- ShapeSync Detail-Aware Axis Warp implementation.
 - Fixed shared-camera computation.
 - CPU six-view shaded, normal-RGB, and position-RGB renderer.
 - Extent, monotonicity, and shared-camera tests.
@@ -24,4 +24,3 @@
 - Private infrastructure configuration.
 - API credentials and service endpoints.
 - Third-party model weights that cannot be redistributed.
-

@@ -1,19 +1,25 @@
 # DimRatio — Anonymous Review Artifact
 
-This repository is a compact review-time artifact for **DimRatio**, a framework for dimension-conditioned industrial multi-view generation. It contains an editable pipeline diagram and a runnable verification demo for the two geometry components that determine the dimensional behavior of the method:
+This repository accompanies **DimRatio**, a framework for **Geometric Multi-view Generation**. Given an object image and target dimensions, the task is to generate a complete set of standard-view product images whose proportions correctly reflect the requested dimensional changes.
 
-1. **Detail-Aware Axis Warp (DAAW)** for extent-exact, monotone, detail-preserving mesh deformation.
-2. **Fixed shared-camera framing** for rendering the source object and every allowed dimensional variant with the same orthographic projection range.
+Existing multi-view generation methods often provide limited viewpoint coverage, while text- or layout-based proportion controls do not impose a shared geometric condition across views. DimRatio addresses these limitations through two coordinated blocks:
+
+1. **ViewForge Block** completes the missing standard views and establishes a complete shared geometric representation of the input object.
+2. **ShapeSync Block** transforms the shared geometry according to the target dimension ratios. Its **Detail-Aware Axis Warp (DAAW)** adaptively distributes the deformation while preserving salient geometric details, and the transformed geometry provides consistent conditions for all affected views.
 
 ![DimRatio pipeline](assets/pipeline.png)
 
-## Scope of this artifact
+## Method overview
 
-The demo starts from a procedurally generated proxy mesh, applies a requested width/depth/height ratio, fixes the cameras using the complete allowed condition set, and exports shaded, normal-RGB, and position-RGB six-view renderings.
+During input preparation, the reference image is expanded into horizontal views and reconstructed as a 3D proxy. The ViewForge Block centers and normalizes this proxy, locks a shared six-view camera setup, and renders geometric conditions for completing the basic six views. Given a target proportion, the ShapeSync Block converts the source and target dimensions into axis-wise scale ratios, applies DAAW to the shared proxy, and renders transformed normal and position conditions with the same cameras. These conditions guide the same geometry-conditioned multi-view generation model to produce the dimension-controlled views.
 
 ![Qualitative dimension-control results](assets/showcase.png)
 
-The figure shows the generated basic six views and independent `+20%` changes in depth, height, and width. All source and target conditions use the same six cameras and a shared projection range.
+The figure shows the basic six-view completion and independent `+20%` changes in depth, height, and width. Dashed boxes indicate the views affected by each dimension change.
+
+## Review artifact scope
+
+The included CPU demo verifies the released geometric components of ShapeSync. It starts from a procedurally generated proxy mesh, applies a requested width, depth, or height ratio using DAAW, fixes the cameras over the complete allowed condition set, and exports shaded, normal-RGB, and position-RGB six-view renderings.
 
 This anonymous artifact intentionally does **not** distribute the paper benchmark, commercial product imagery, complete experiment repository, model checkpoints, or large-scale inference/evaluation pipeline. The full implementation, benchmark construction tools, trained artifacts where redistribution is permitted, and complete qualitative results will be released after publication.
 
